@@ -43,11 +43,6 @@ export default function TeamSection() {
               <h3 className="font-semibold text-white text-[15px]">{m.name}</h3>
               <p className="text-amber-500 text-[13px] mt-1">{m.role}</p>
               <p className="text-gray-600 text-xs mt-0.5">{m.exp} experience</p>
-
-              <div className="flex justify-center gap-3 mt-3.5">
-                <FaLinkedin size={15} className="text-gray-600 cursor-pointer hover:text-amber-500 transition-colors" />
-                <FaTwitter  size={15} className="text-gray-600 cursor-pointer hover:text-amber-500 transition-colors" />
-              </div>
             </div>
           ))}
         </div>

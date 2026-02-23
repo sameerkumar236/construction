@@ -1,4 +1,5 @@
 import { FaHardHat } from "react-icons/fa";
+import logo from "../components/construction.png"
 
 const FOOTER_LINKS = ["Privacy", "Terms", "Sitemap"];
 
@@ -9,20 +10,21 @@ export default function Footer() {
 
         {/* Logo */}
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-[7px] bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center">
-            <FaHardHat size={14} color="#111" />
-          </div>
-          <span
-            className="text-white tracking-[0.12em]"
-            style={{ fontFamily: "'Bebas Neue', cursive", fontSize: 22 }}
-          >
-            BUILD<span className="text-amber-500">CRAFT</span>
-          </span>
-        </div>
-
+  <img 
+    src={logo} 
+    alt="AV Construction Logo"
+    className="w-10 h-10 object-contain"
+  />
+  <span
+    className="text-white tracking-[0.12em]"
+    style={{ fontFamily: "'Bebas Neue', cursive", fontSize: 22 }}
+  >
+    AV<span className="text-amber-500"> Construction</span>
+  </span>
+</div>
         {/* Copyright */}
         <p className="text-[#444] text-[13px]">
-          © 2025 BuildCraft Construction. All rights reserved.
+          © 2025 AV Construction. All rights reserved.
         </p>
 
         {/* Links */}

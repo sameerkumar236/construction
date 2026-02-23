@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaHardHat, FaBars, FaTimes, FaArrowRight } from "react-icons/fa";
 import { NAV_LINKS } from "../data/dummydata";
+import logo from "../components/construction.png"
 
 export default function Navbar({ activeSection, onScrollTo }) {
   const [navOpen, setNavOpen] = useState(false);
@@ -17,17 +18,19 @@ export default function Navbar({ activeSection, onScrollTo }) {
       <div className="max-w-[1280px] mx-auto px-6 flex items-center justify-between h-16">
 
         {/* Logo */}
-        <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center">
-            <FaHardHat size={18} color="#111" />
-          </div>
-          <span
-            className="text-white tracking-[0.12em]"
-            style={{ fontFamily: "'Bebas Neue', cursive", fontSize: 26 }}
-          >
-            BUILD<span className="text-amber-500">CRAFT</span>
-          </span>
-        </div>
+       <div className="flex items-center gap-2.5">
+  <img 
+    src={logo} 
+    alt="AV Construction Logo"
+    className="w-10 h-10 object-contain"
+  />
+  <span
+    className="text-white tracking-[0.12em]"
+    style={{ fontFamily: "'Bebas Neue', cursive", fontSize: 26 }}
+  >
+    AV<span className="text-amber-500"> Construction</span>
+  </span>
+</div>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8">
