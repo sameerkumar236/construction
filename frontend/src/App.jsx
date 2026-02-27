@@ -12,7 +12,7 @@ import WhyUsSection      from "./components/Whyussection ";
 import TeamSection       from "./components/Teamsection ";
 import TestimonialsSection from "./components/Testimonialssection";
 import CTABanner         from "./components/Ctabanner";
-import ContactSection    from "./components/Contactsection ";
+import ContactSection    from "./components/Contactsection";
 import Footer            from "./components/Footer";
 
 export default function App() {
