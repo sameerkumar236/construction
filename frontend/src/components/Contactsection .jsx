@@ -123,7 +123,7 @@ export default function ContactSection() {
             />
 
             <select
-              className={inputCls}
+              className={`${inputCls} appearance-none bg-[#1a1a1a]`}
               name="service"
               value={form.service}
               onChange={update("service")}

@@ -30,7 +30,7 @@ export default function HeroSection({ onScrollTo }) {
             <span className="text-amber-500">THE FUTURE</span>
           </h1>
 
-          <p className="text-gray-500 text-[17px] leading-[1.7] max-w-[420px] mb-8">
+          <p className="text-gray-300 text-[17px] leading-[1.7] max-w-[420px] mb-8">
             From commercial towers to luxury residences, BuildCraft delivers
             precision engineering and timeless architecture across North America.
           </p>

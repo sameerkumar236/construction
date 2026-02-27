@@ -3,7 +3,7 @@ import { PROJECTS } from "../data/dummydata";
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="py-24 px-6 bg-[#0a0a0a]">
+   <section id="projects" className="py-24 px-6 bg-[#0a0a0a]">
       <div className="max-w-[1280px] mx-auto">
 
         {/* Header */}

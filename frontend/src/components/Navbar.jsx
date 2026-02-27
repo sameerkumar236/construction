@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaHardHat, FaBars, FaTimes, FaArrowRight } from "react-icons/fa";
 import { NAV_LINKS } from "../data/dummydata";
-import logo from "../components/construction.png"
+import logo from "../assets/construction.png"
 
 export default function Navbar({ activeSection, onScrollTo }) {
   const [navOpen, setNavOpen] = useState(false);

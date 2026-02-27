@@ -1,5 +1,5 @@
 import { FaHardHat } from "react-icons/fa";
-import logo from "../components/construction.png"
+import logo from "../assets/construction.png"
 
 const FOOTER_LINKS = ["Privacy", "Terms", "Sitemap"];
 

@@ -11,12 +11,9 @@ const ICONS = [
 export default function WhyUsSection() {
   return (
     <section className="py-[72px] px-6 bg-[#0a0a0a]">
-      <div
-        className="max-w-[1280px] mx-auto grid gap-10"
-        style={{ gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))" }}
-      >
+      <div className="max-w-[1280px] mx-auto flex flex-wrap justify-center gap-10">
         {WHY_US.map((w, i) => (
-          <div key={i} className="flex gap-[18px] items-start">
+          <div key={i} className="flex gap-[18px] items-start w-[280px]">
             <div className="text-amber-500 mt-0.5 shrink-0">
               {ICONS[i]}
             </div>
