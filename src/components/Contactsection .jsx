@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import {
   FaPhone,
@@ -12,6 +12,8 @@ import { SERVICES_DATA } from "../data/servicesdata";
 const CONTACT_ICONS = [<FaPhone />, <FaEnvelope />, <FaMapMarkerAlt />];
 
 export default function ContactSection() {
+  const formRef = useRef(null); // ✅ FIX ADDED
+
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -27,11 +29,11 @@ export default function ContactSection() {
     e.preventDefault();
 
     emailjs
-      .send(
-        "service_2bq807n",      // ✅ EmailJS Service ID
-        "template_3ha9ljf", 
-        form,
-       "c-8hwLr3PjK9EbwRX"
+      .sendForm(
+        "service_ilz3ptg",
+        "template_l6hzn1s",
+        formRef.current,
+        "DimHdpCUgRLBG2l_o"
       )
       .then(
         () => {
@@ -92,7 +94,7 @@ export default function ContactSection() {
             Send Us a Message
           </h3>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div className="grid grid-cols-2 gap-3.5">
               <input
                 className={inputCls}
@@ -123,13 +125,18 @@ export default function ContactSection() {
             />
 
             <select
-              className={inputCls}
-              name="service"
+              className={`${inputCls} bg-gray-900 text-white`}
+              name="service"                 // ✅ important for EmailJS
               value={form.service}
               onChange={update("service")}
             >
               {SERVICES_DATA.map((s) => (
-                <option key={s.title}>{s.title}</option>
+                <option
+                  key={s.title}
+                  className="bg-gray-900 text-white"
+                >
+                  {s.title}
+                </option>
               ))}
             </select>
 
