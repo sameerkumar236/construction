@@ -35,7 +35,7 @@ const TABS = [
   { id: "finish", label: "Finish Levels", icon: FaTags },
   { id: "rates",  label: "Tax & Rates",   icon: MdPercent },
   { id: "addons", label: "Add-ons",       icon: FaPlus },
-  { id: "admins", label: "Admins",        icon: FaUserShield },
+
 ];
 
 const fmtINR = (n) =>
@@ -91,10 +91,7 @@ export default function Dashboard({ user, onLogout }) {
 
   // Admin state
   const [admins,       setAdmins]       = useState([]);
-  const [adminForm,    setAdminForm]    = useState({ name: "", email: "", password: "" });
-  const [adminLoading, setAdminLoading] = useState(false);
-  const [adminError,   setAdminError]   = useState("");
-  const [adminSuccess, setAdminSuccess] = useState("");
+
 
   // ── Load pricing ────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -115,18 +112,6 @@ export default function Dashboard({ user, onLogout }) {
       }
     })();
   }, []);
-
-  // ── Load admins when tab opens ───────────────────────────────────────────────
-  useEffect(() => {
-    if (tab === "admins") loadAdmins();
-  }, [tab]);
-
-  const loadAdmins = async () => {
-    try {
-      const { data } = await api.get("/api/auth/admins");
-      setAdmins(data.admins);
-    } catch {}
-  };
 
   // ── Save pricing ────────────────────────────────────────────────────────────
 const handleSave = async () => {
@@ -174,35 +159,9 @@ const handleSave = async () => {
     onLogout();
   };
 
-  // ── Admin actions ────────────────────────────────────────────────────────────
-  const handleAddAdmin = async () => {
-    setAdminError(""); setAdminSuccess("");
-    const { name, email, password } = adminForm;
-    if (!name || !email || !password) return setAdminError("All fields required.");
-    if (password.length < 6) return setAdminError("Password must be at least 6 characters.");
-    setAdminLoading(true);
-    try {
-      await api.post("/api/auth/admins", adminForm);
-      setAdminSuccess("Admin added successfully!");
-      setAdminForm({ name: "", email: "", password: "" });
-      loadAdmins();
-      setTimeout(() => setAdminSuccess(""), 3000);
-    } catch (err) {
-      setAdminError(err.response?.data?.message || "Failed to add admin.");
-    } finally {
-      setAdminLoading(false);
-    }
-  };
 
-  const handleRemoveAdmin = async (id, name) => {
-    if (!confirm(`Remove admin "${name}"?`)) return;
-    try {
-      await api.delete(`/api/auth/admins/${id}`);
-      loadAdmins();
-    } catch (err) {
-      alert(err.response?.data?.message || "Failed to remove.");
-    }
-  };
+
+
 
   // ── Build type helpers ───────────────────────────────────────────────────────
   const updateBuildRate = (k, v) => setBuildTypes((p) => ({ ...p, [k]: Number(v) }));
@@ -420,105 +379,9 @@ const handleSave = async () => {
           </Section>
         )}
 
-        {/* ── ADMINS TAB ── */}
-        {tab === "admins" && (
-          <div className="flex flex-col gap-5">
-            {/* Current admins */}
-            <Section title="👥 Current Admins">
-              <div className="flex flex-col gap-3">
-                {admins.map((a) => (
-                  <div key={a._id} className="flex items-center justify-between p-4 bg-white/[0.02] border border-white/[0.06] rounded-xl">
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
-                        <FaUserShield size={14} className="text-amber-500" />
-                      </div>
-                      <div>
-                        <div className="text-white text-sm font-semibold flex items-center gap-2">
-                          {a.name}
-                          {a._id === user?._id && (
-                            <span className="text-[10px] bg-amber-500/15 border border-amber-500/30 text-amber-400 px-2 py-0.5 rounded-full">You</span>
-                          )}
-                        </div>
-                        <div className="text-gray-600 text-xs">{a.email}</div>
-                      </div>
-                    </div>
-                    {a._id !== user?._id && (
-                      <button onClick={() => handleRemoveAdmin(a._id, a.name)}
-                        className="flex items-center gap-1.5 bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500/20 px-3 py-2 rounded-lg text-xs font-medium cursor-pointer transition-all">
-                        <FaTrash size={11} /> Remove
-                      </button>
-                    )}
-                  </div>
-                ))}
-                {admins.length === 0 && (
-                  <p className="text-gray-700 text-sm text-center py-4">Loading admins…</p>
-                )}
-              </div>
-            </Section>
 
-            {/* Add admin */}
-            {admins.length < 2 ? (
-              <Section title="➕ Add Second Admin">
-                <p className="text-gray-600 text-xs mb-4">
-                  You can have a maximum of 2 admins. Add one more trusted person below.
-                </p>
-                <div className="flex flex-col gap-3">
-                  <input className={inputCls} placeholder="Full Name"
-                    value={adminForm.name} onChange={(e) => setAdminForm(p => ({ ...p, name: e.target.value }))} />
-                  <input className={inputCls} type="email" placeholder="Email"
-                    value={adminForm.email} onChange={(e) => setAdminForm(p => ({ ...p, email: e.target.value }))} />
-                  <input className={inputCls} type="password" placeholder="Password (min 6 chars)"
-                    value={adminForm.password} onChange={(e) => setAdminForm(p => ({ ...p, password: e.target.value }))} />
 
-                  {adminError && (
-                    <div className="bg-red-500/10 border border-red-500/30 rounded-lg px-3.5 py-2.5 text-red-400 text-xs">{adminError}</div>
-                  )}
-                  {adminSuccess && (
-                    <div className="bg-green-500/10 border border-green-500/30 rounded-lg px-3.5 py-2.5 text-green-400 text-xs">{adminSuccess}</div>
-                  )}
 
-                  <button onClick={handleAddAdmin} disabled={adminLoading}
-                    className="bg-gradient-to-br from-amber-500 to-amber-600 text-[#111] py-3 rounded-xl font-bold text-sm cursor-pointer flex items-center justify-center gap-2 hover:from-amber-400 hover:to-amber-500 transition-all disabled:opacity-50">
-                    {adminLoading
-                      ? <span className="w-4 h-4 border-2 border-[#111]/40 border-t-[#111] rounded-full animate-spin" />
-                      : <><FaUserPlus size={13} /> Add Admin</>}
-                  </button>
-                </div>
-              </Section>
-            ) : (
-              <div className="bg-amber-500/[0.05] border border-amber-500/20 rounded-2xl p-5 text-center">
-                <FaUserShield size={28} className="text-amber-500/40 mx-auto mb-2" />
-                <p className="text-amber-500/70 text-sm font-semibold">Maximum 2 admins reached</p>
-                <p className="text-gray-700 text-xs mt-1">Remove an existing admin to add a new one.</p>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Save Bar (hidden on admins tab) */}
-        {tab !== "admins" && (
-          <div className="sticky bottom-6 mt-8">
-            <div className="bg-[#111] border border-white/10 rounded-2xl p-4 flex items-center justify-between shadow-2xl">
-              <div>
-                <div className="text-white text-sm font-semibold">Save Changes</div>
-                <div className="text-gray-600 text-xs">Saved to MongoDB · applied instantly</div>
-              </div>
-              <div className="flex gap-3">
-                <button onClick={handleReset}
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 text-gray-500 hover:text-white hover:border-white/20 text-sm font-semibold cursor-pointer transition-all">
-                  <FaRedo size={11} /> Reset
-                </button>
-                <button onClick={handleSave} disabled={isSaving}
-                  className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-[#111] text-sm font-bold cursor-pointer transition-all disabled:opacity-50 ${
-                    saved ? "bg-green-500" : "bg-gradient-to-br from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500"
-                  }`}>
-                  {isSaving ? <span className="w-4 h-4 border-2 border-[#111]/40 border-t-[#111] rounded-full animate-spin" /> : <FaSave size={13} />}
-                  {saved ? "Saved ✓" : isSaving ? "Saving…" : "Save Pricing"}
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </main>
     </div>
   );
