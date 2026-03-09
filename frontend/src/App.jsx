@@ -11,9 +11,8 @@ import CalculatorSection   from "./components/Calculatorsection";
 import WhyUsSection        from "./components/Whyussection ";
 import TeamSection         from "./components/Teamsection ";
 import TestimonialsSection from "./components/Testimonialssection";
-
 import CTABanner           from "./components/Ctabanner";
-import ContactSection      from "./components/Contactsection ";
+import ContactSection      from "./components/Contactsection";
 import Footer              from "./components/Footer";
 import AuthPage            from "./Pages/AuthPage";
 import Dashboard           from "./Pages/Dashboard";
@@ -30,9 +29,6 @@ const navigate = (page) => {
   const pathMap = { home: "/", auth: "/login", dashboard: "/dashboard" };
   window.history.pushState({ page }, "", pathMap[page] || "/");
 };
-import CTABanner         from "./components/Ctabanner.jsx";
-import ContactSection    from "./components/Contactsection";
-import Footer            from "./components/Footer";
 
 export default function App() {
   const { user, checkingAuth, login, logout } = useAuth();
