@@ -8,31 +8,43 @@ A modern, dark-themed construction company website built with **React + Vite + T
 
 ```
 buildcraft/
-├── index.html                        # HTML entry point
-├── package.json                      # Dependencies & scripts
-├── vite.config.js                    # Vite bundler config
+│
+├── index.html
+├── package.json
+├── vite.config.js
+│
 └── src/
-    ├── main.jsx                     # React root mount
-    ├── App.jsx                       # Main app – composes all sections
-    │
+    ├── main.jsx
+    ├── App.jsx
     │
     ├── data/
-    │   ├── dummyData.js              # All faker-inspired dummy data (projects, team, testimonials…)
-    │   ├── servicesData.js           # Services list
-    │   └── calculatorData.js        # Rate tables, multipliers, extras config
+    │   ├── dummyData.js
+    │   ├── servicesData.js
+    │   └── calculatorData.js
     │
-    └── components/
-        ├── Navbar.jsx                # Sticky navbar with active section highlight
-        ├── HeroSection.jsx           # Full-screen hero with stat cards
-        ├── ServicesSection.jsx       # 6 service cards with icons
-        ├── ProjectsSection.jsx       # 6 project portfolio cards
-        ├── CalculatorSection.jsx     # 🧮 SquareFeet → Amount calculator
-        ├── WhyUsSection.jsx          # 3 USP highlights
-        ├── TeamSection.jsx           # 4 team member cards
-        ├── TestimonialsSection.jsx   # 3 client reviews
-        ├── CTABanner.jsx             # Gold call-to-action banner
-        ├── ContactSection.jsx        # Contact info + message form
-        └── Footer.jsx                # Footer with links
+    ├── components/
+    │   ├── Navbar.jsx
+    │   ├── HeroSection.jsx
+    │   ├── ServicesSection.jsx
+    │   ├── ProjectsSection.jsx
+    │   ├── CalculatorSection.jsx
+    │   ├── WhyUsSection.jsx
+    │   ├── TeamSection.jsx
+    │   ├── TestimonialsSection.jsx
+    │   ├── CTABanner.jsx
+    │   ├── ContactSection.jsx
+    │   └── Footer.jsx
+    │
+    ├── Pages/
+    │   ├── AuthPage.jsx
+    │   └── Dashboard.jsx
+    │
+    ├── Context/
+    │   └── AuthContext.jsx
+    │
+    └── utils/
+        └── api.jsx
+        
 ```
 
 ---
