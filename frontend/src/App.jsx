@@ -11,6 +11,7 @@ import CalculatorSection   from "./components/Calculatorsection";
 import WhyUsSection        from "./components/Whyussection ";
 import TeamSection         from "./components/Teamsection ";
 import TestimonialsSection from "./components/Testimonialssection";
+<<<<<<< HEAD
 import CTABanner           from "./components/Ctabanner";
 import ContactSection      from "./components/Contactsection ";
 import Footer              from "./components/Footer";
@@ -29,6 +30,11 @@ const navigate = (page) => {
   const pathMap = { home: "/", auth: "/login", dashboard: "/dashboard" };
   window.history.pushState({ page }, "", pathMap[page] || "/");
 };
+=======
+import CTABanner         from "./components/Ctabanner";
+import ContactSection    from "./components/Contactsection";
+import Footer            from "./components/Footer";
+>>>>>>> 2b8e57ebbcb8efd5500e18ed087d8e338e171d2d
 
 export default function App() {
   const { user, checkingAuth, login, logout } = useAuth();

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import {
   FaPhone,
@@ -12,6 +12,8 @@ import { SERVICES_DATA } from "../data/servicesdata";
 const CONTACT_ICONS = [<FaPhone />, <FaEnvelope />, <FaMapMarkerAlt />];
 
 export default function ContactSection() {
+  const formRef = useRef(null);
+
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -27,11 +29,11 @@ export default function ContactSection() {
     e.preventDefault();
 
     emailjs
-      .send(
-        "service_2bq807n",      // ✅ EmailJS Service ID
-        "template_3ha9ljf", 
-        form,
-       "c-8hwLr3PjK9EbwRX"
+      .sendForm(
+        "service_ilz3ptg",
+        "template_l6hzn1s",
+        formRef.current,
+        "DimHdpCUgRLBG2l_o"
       )
       .then(
         () => {
@@ -63,12 +65,17 @@ export default function ContactSection() {
           <span className="block text-[11px] tracking-[0.25em] uppercase text-amber-500 font-semibold mb-3">
             Get In Touch
           </span>
+
           <h2
             className="text-white mb-2"
-            style={{ fontFamily: "'Bebas Neue', cursive", fontSize: "clamp(40px,6vw,72px)" }}
+            style={{
+              fontFamily: "'Bebas Neue', cursive",
+              fontSize: "clamp(40px,6vw,72px)",
+            }}
           >
             CONTACT <span className="text-amber-500">US</span>
           </h2>
+
           <div className="h-1 w-24 bg-gradient-to-r from-amber-500 to-amber-600 rounded-full mb-10" />
 
           <div className="flex flex-col gap-5">
@@ -78,7 +85,7 @@ export default function ContactSection() {
                   {CONTACT_ICONS[i]}
                 </div>
                 <div>
-                  <p className="text-gray-600 text-xs">{c.label}</p>
+                  <p className="text-gray-400 text-xs">{c.label}</p>
                   <p className="text-white text-sm font-medium">{c.value}</p>
                 </div>
               </div>
@@ -92,7 +99,11 @@ export default function ContactSection() {
             Send Us a Message
           </h3>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-4"
+          >
             <div className="grid grid-cols-2 gap-3.5">
               <input
                 className={inputCls}
@@ -123,13 +134,18 @@ export default function ContactSection() {
             />
 
             <select
-              className={`${inputCls} appearance-none bg-[#1a1a1a]`}
+              className={`${inputCls} appearance-none bg-gray-900 text-white`}
               name="service"
               value={form.service}
               onChange={update("service")}
             >
               {SERVICES_DATA.map((s) => (
-                <option key={s.title}>{s.title}</option>
+                <option
+                  key={s.title}
+                  className="bg-gray-900 text-white"
+                >
+                  {s.title}
+                </option>
               ))}
             </select>
 
